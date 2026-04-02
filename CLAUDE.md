@@ -17,13 +17,15 @@ npm run lint     # Run ESLint
 
 ## Architecture
 
-Single-component React app (`src/App.jsx`) with no routing or state management library. All state lives in `App` via `useState`. No tests are set up.
+React app with no routing or state management library. The `transactions` array lives in `App` and is passed down as props. No tests are set up.
 
-- `src/App.jsx` — all application logic and JSX
+- `src/App.jsx` — holds the `transactions` state and `handleAdd`; renders the three child components
+- `src/Summary.jsx` — computes and displays income, expenses, and balance from `transactions` prop
+- `src/TransactionForm.jsx` — owns its own form state; calls `onAdd(transaction)` prop on submit
+- `src/TransactionList.jsx` — owns filter state; receives `transactions` prop and renders the filtered table
 - `src/App.css` — component styles
 - `src/index.css` — global styles
 
 ## Known Bugs (intentional)
 
-- Transaction `amount` is stored as a string; arithmetic on it produces string concatenation instead of numeric sums.
 - Transaction #4 ("Freelance Work") is marked `type: "expense"` but should be `"income"`.
