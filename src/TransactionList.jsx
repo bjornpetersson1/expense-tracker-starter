@@ -10,7 +10,7 @@ const categories = [
   "other",
 ];
 
-function TransactionList({ transactions }) {
+function TransactionList({ transactions, onDelete }) {
   const [filterType, setFilterType] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
 
@@ -54,6 +54,7 @@ function TransactionList({ transactions }) {
             <th>Description</th>
             <th>Category</th>
             <th>Amount</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +69,16 @@ function TransactionList({ transactions }) {
                 }
               >
                 {t.type === "income" ? "+" : "-"}${t.amount}
+              </td>
+              <td>
+                <button
+                  onClick={() => {
+                    if (window.confirm("Are you sure you want to delete this transaction?"))
+                      onDelete(t.id);
+                  }}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
